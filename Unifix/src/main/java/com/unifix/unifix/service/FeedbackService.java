@@ -24,13 +24,14 @@ public class FeedbackService {
                 request.getEmail(),
                 request.getMessage()
             );
-            
+
+
             Feedback savedFeedback = feedbackRepository.save(feedback);
             log.info("Feedback saved successfully with ID: {}", savedFeedback.getId());
             
             // Send email notification
             emailService.sendFeedbackEmail(savedFeedback);
-            
+
             return savedFeedback;
             
         } catch (Exception e) {

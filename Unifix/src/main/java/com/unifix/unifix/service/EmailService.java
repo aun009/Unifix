@@ -17,7 +17,8 @@ public class EmailService {
     
     @Value("${app.email.recipient:arunmahajan9240@gmail.com}")
     private String recipientEmail;
-    
+
+
     @Value("${app.email.from:noreply@unifix.com}")
     private String fromEmail;
     

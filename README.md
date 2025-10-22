@@ -152,19 +152,6 @@ Run linters/tests locally where applicable before opening a PR.
 
 ---
 
-## 🧩 Troubleshooting
-- Gmail error `535 5.7.8 Username and Password not accepted`:
-  - Use a Gmail App Password (not your normal password).
-  - Paste 16 characters without spaces; ensure `app.email.from` equals your Gmail.
-  - If Google blocks sign‑in, visit `https://accounts.google.com/DisplayUnlockCaptcha`, approve, then retry.
-- MongoDB connection error with special characters in password:
-  - URL‑encode `@` as `%40`, `%` as `%25` in the connection string.
-- Vite error about Node version:
-  - Upgrade Node to ≥ 20.19 or 22.12 (`nvm install 20.19.0` and `nvm use 20.19.0`).
-- Port 8080 already in use:
-  - Jenkins or another service may occupy it; UniFix uses 8081 by default.
-
----
 
 ## 📄 License
 This project is open‑source under a permissive license (add your preferred license file if needed).

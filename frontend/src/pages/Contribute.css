@@ -301,6 +301,7 @@
   overflow-x: auto;
   margin: 1.5rem 0;
   border: 1px solid #30363d;
+  position: relative;
 }
 
 .contribution-code-block pre {
@@ -310,6 +311,25 @@
   color: #e6edf3;
   font-size: 0.9rem;
   line-height: 1.5;
+}
+
+.copy-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+}
+
+.copy-button:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
 @keyframes slideDown {

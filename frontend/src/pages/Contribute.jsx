@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './Contribute.css';
 
 const Contribute = () => {
   const cardRefs = useRef([]);
+  const [copiedIndex, setCopiedIndex] = useState(null);
   
   useEffect(() => {
   const currentRefs = cardRefs.current;
@@ -61,6 +62,27 @@ const Contribute = () => {
     }
   ];
 
+  const handleCopy = async (textToCopy, index) => {
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      setCopiedIndex(index);
+      setTimeout(() => setCopiedIndex(null), 1500);
+    } catch (err) {
+      // Fallback for older browsers
+      const textarea = document.createElement('textarea');
+      textarea.value = textToCopy;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        setCopiedIndex(index);
+        setTimeout(() => setCopiedIndex(null), 1500);
+      } finally {
+        document.body.removeChild(textarea);
+      }
+    }
+  };
+
   return (
     <div className="contribute-container">
       <h1 className="contribute-title">How to Contribute</h1>
@@ -76,6 +98,13 @@ const Contribute = () => {
             <h3 className="contribution-title">{step.title}</h3>
             <p className="contribution-description">{step.description}</p>
             <div className="contribution-code-block">
+              <button 
+                className="copy-button" 
+                onClick={() => handleCopy(step.code, index)}
+                aria-label="Copy command"
+              >
+                {copiedIndex === index ? 'Copied' : 'Copy'}
+              </button>
               <pre>{step.code}</pre>
             </div>
             <div className="step-number">{index + 1}</div>

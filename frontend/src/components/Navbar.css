@@ -1,0 +1,58 @@
+.navbar {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(49, 10, 63, 0.136);
+    border-radius: 22.5px;
+    box-shadow: 0 12px 48px 0 rgba(38, 44, 123, 0.37);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 3px solid rgba(255, 255, 255, 0.18);
+    padding: 0.75rem 1.5rem;
+    z-index: 1000;
+    /* // i want to increase the size of this navbar */
+    height: 50px;
+    width: 40%;
+    font-size: 1.8rem;
+    font-weight: bold;
+    font-style: oblique;
+
+    /* width; */
+  }
+  
+  /*   font-size: 1.2rem;  this is not increasing  the text size in the navbar
+    i want to increase the size of navbar overall  not only height also text size in the navbar
+    i want to increase the size of navbar overall  not only height also text size in the navbar
+  */
+  /* i want to increase the size of navbar overall  not only height also text size in the navbar*/
+
+  
+
+  .navbar-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+    text-align: center;
+    /* i want the home domains feedback contribute to be aligned in the center */
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .navbar-link {
+    color: #7c6d14;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+  }
+  
+  .navbar-link:hover {
+    color: #34db4d;
+    transform: scale(1.1);
+    text-shadow: 0 0 10px rgba(52, 219, 77, 0.5);
+  }

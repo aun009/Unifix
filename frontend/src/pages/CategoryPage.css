@@ -1,0 +1,157 @@
+.category-page {
+  padding: 2rem;
+  background-color: #1e1f26;
+  min-height: 100vh;
+}
+
+.author-section{
+  background-color: #7483f5;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: solid;
+  /* // change text colot to white and make it bold */
+  color: #ffffff;
+  /* make text bold  */
+  font-weight: bold;
+
+}
+
+.category-title {
+  margin-top: 100px;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+.search-container {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 500px;
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  color: #ffffff;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #03dac6;
+  box-shadow: 0 0 5px rgba(3, 218, 198, 0.3);
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.scripts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.script-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.script-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.script-name {
+  color: #03dac6;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.script-description {
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.innovation-section {
+  background: rgba(3, 218, 198, 0.1);
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+}
+
+.innovation-section h4 {
+  color: #03dac6;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.innovation-section p {
+  color: #ffffff;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.solution-section {
+  background: rgba(3, 218, 198, 0.1);
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+}
+
+.solution-section h4 {
+  color: #03dac6;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.solution-section p {
+  color: #ffffff;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.download-button {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background: #03dac6;
+  color: #000000;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.download-button:hover {
+  background: #02b3a2;
+}
+
+@media (max-width: 768px) {
+  .category-page {
+    padding: 1rem;
+  }
+
+  .scripts-container {
+    grid-template-columns: 1fr;
+  }
+
+  .category-title {
+    font-size: 2rem;
+  }
+  
+  .script-card {
+    padding: 1rem;
+  }
+}

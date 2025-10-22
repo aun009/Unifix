@@ -1,5 +1,5 @@
 #!/bin/bash
-# filepath: /home/yash/UniFix/frontend/public/scripts/Software_Updates.sh
+# filepath: /home/Arun/UniFix/frontend/public/scripts/Software_Updates.sh
 
 echo "========== Automated Software Updates =========="
 

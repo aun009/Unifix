@@ -1,5 +1,5 @@
 #!/bin/bash
-# filepath: /home/yash/UniFix/frontend/public/scripts/LabCleanup.sh
+# filepath: /home/Arun/UniFix/frontend/public/scripts/LabCleanup.sh
 
 echo "========== Lab Cleanup Script =========="
 

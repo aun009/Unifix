@@ -1,5 +1,5 @@
 #!/bin/bash
-# filepath: /home/yash/UniFix/frontend/public/scripts/Software_Backup.sh
+# filepath: /home/Arun/UniFix/frontend/public/scripts/Software_Backup.sh
 
 echo "========== Software Configuration Backup =========="
 

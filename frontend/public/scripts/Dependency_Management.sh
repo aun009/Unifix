@@ -1,5 +1,5 @@
 #!/bin/bash
-# filepath: /home/yash/UniFix/frontend/public/scripts/Dependency_Management.sh
+# filepath: /home/Arun/UniFix/frontend/public/scripts/Dependency_Management.sh
 
 echo "========== Dependency Management =========="
 

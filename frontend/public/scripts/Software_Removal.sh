@@ -1,5 +1,5 @@
 #!/bin/bash
-# filepath: /home/yash/UniFix/frontend/public/scripts/Software_Removal.sh
+# filepath: /home/Arun/UniFix/frontend/public/scripts/Software_Removal.sh
 
 echo "========== Software Removal and Cleanup =========="
 

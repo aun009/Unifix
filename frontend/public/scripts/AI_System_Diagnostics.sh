@@ -1,5 +1,5 @@
 #!/bin/bash
-# filepath: /home/yash/UniFix/frontend/public/scripts/AI_System_Diagnostics.sh
+# filepath: /home/Arun/UniFix/frontend/public/scripts/AI_System_Diagnostics.sh
 
 echo "========== AI-Powered System Diagnostics =========="
 

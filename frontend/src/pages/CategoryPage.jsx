@@ -630,14 +630,14 @@ const CategoryPage = () => {
         name: "Show IP Configuration",
         description: "Displays detailed IP configuration and network settings.",
         solution: "Implements IP configuration display, network interface details, and routing information. Provides comprehensive network insights.",
-        author: "Yash Patil",
+        author: "Arun Mahajan",
         downloadLink: "/scripts/Show_IP.sh",
       },
       {
         name: "Network Information",
         description: "Displays detailed network information and statistics.",
         solution: "Implements network diagnostics, performance metrics, and configuration details. Provides comprehensive network insights.",
-        author: "Yash Patil",
+        author: "Arun Mahajan",
         downloadLink: "/scripts/Network_Info.sh",
       },
       {
@@ -768,7 +768,7 @@ const CategoryPage = () => {
         name: "Password generator",
         description: "Generates strong, random passwords.",
         solution: "Generates strong, random passwords using a combination of letters, numbers, and special characters. Ensures password security.",
-        author: "Yash Patil",
+        author: "Arun Mahajan",
         downloadLink: "/scripts/Password_Generator.sh",
       },
       {

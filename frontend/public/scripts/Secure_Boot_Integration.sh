@@ -1,5 +1,5 @@
 #!/bin/bash
-# filepath: /home/yash/UniFix/frontend/public/scripts/Secure_Boot_Integration.sh
+# filepath: /home/Arun/UniFix/frontend/public/scripts/Secure_Boot_Integration.sh
 
 echo "========== Secure Boot Integration =========="
 

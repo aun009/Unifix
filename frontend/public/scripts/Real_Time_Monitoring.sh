@@ -1,5 +1,5 @@
 #!/bin/bash
-# filepath: /home/yash/UniFix/frontend/public/scripts/Real_Time_Monitoring.sh
+# filepath: /home/Arun/UniFix/frontend/public/scripts/Real_Time_Monitoring.sh
 
 echo "========== Real-time System Monitoring =========="
 

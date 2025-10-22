@@ -32,7 +32,7 @@ const Contribute = () => {
     {
       title: 'Fork the Repository',
       description: 'Start by forking the UniFix repository to your own GitHub account. This creates a copy of the repository under your account that you can modify.',
-      code: 'git clone https://github.com/Yash09042004/UniFix.git'
+      code: 'git clone https://github.com/aun009/UniFix.git'
     },
     {
       title: 'Make Changes',
@@ -57,7 +57,7 @@ const Contribute = () => {
     {
       title: 'Create Pull Request',
       description: 'Submit a pull request from your fork to the original UniFix repository. Provide a clear description of your changes.',
-      code: '# Go to https://github.com/Yash09042004/UniFix\n# Click "New Pull Request"\n# Select your fork and branch\n# Submit the pull request'
+      code: '# Go to https://github.com/aun009/UniFix\n# Click "New Pull Request"\n# Select your fork and branch\n# Submit the pull request'
     }
   ];
 

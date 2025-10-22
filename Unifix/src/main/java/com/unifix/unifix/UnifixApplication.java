@@ -1,5 +1,6 @@
 package com.unifix.unifix;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,17 @@ import java.util.Arrays;
 public class UnifixApplication {
 
     public static void main(String[] args) {
+        // Load .env file
+        Dotenv dotenv = Dotenv.configure()
+                .directory("./")
+                .filename(".env")
+                .load();
+        
+        // Set system properties from .env file
+        dotenv.entries().forEach(entry -> {
+            System.setProperty(entry.getKey(), entry.getValue());
+        });
+        
         SpringApplication.run(UnifixApplication.class, args);
     }
 

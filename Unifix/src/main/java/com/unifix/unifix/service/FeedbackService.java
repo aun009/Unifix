@@ -18,24 +18,34 @@ public class FeedbackService {
     private final EmailService emailService;
     
     public Feedback saveFeedback(FeedbackRequest request) {
+        log.info("Starting to save feedback for: {}", request.getEmail());
         try {
+            log.info("Creating Feedback entity with name: {}, email: {}", request.getName(), request.getEmail());
             Feedback feedback = new Feedback(
                 request.getName(),
                 request.getEmail(),
                 request.getMessage()
             );
 
-
+            log.info("Attempting to save feedback to database...");
             Feedback savedFeedback = feedbackRepository.save(feedback);
             log.info("Feedback saved successfully with ID: {}", savedFeedback.getId());
             
             // Send email notification
-            emailService.sendFeedbackEmail(savedFeedback);
+            log.info("Attempting to send email notification...");
+            try {
+                emailService.sendFeedbackEmail(savedFeedback);
+                log.info("Email notification sent successfully");
+            } catch (Exception emailException) {
+                log.error("Failed to send email notification: {}", emailException.getMessage(), emailException);
+                // Don't fail the whole operation if email fails
+            }
 
             return savedFeedback;
             
         } catch (Exception e) {
             log.error("Error saving feedback: {}", e.getMessage(), e);
+            log.error("Stack trace: ", e);
             throw new RuntimeException("Failed to save feedback", e);
         }
     }

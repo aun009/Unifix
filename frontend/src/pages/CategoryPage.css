@@ -6,13 +6,17 @@
 
 .author-section{
   background-color: #7483f5;
-  border-radius: 10px;
+  border-radius: 20px;
+  padding: 5px;
   text-align: center;
   text-decoration: solid;
   /* // change text colot to white and make it bold */
   color: #ffffff;
   /* make text bold  */
   font-weight: bold;
+  width: fit-content;
+  height: fit-content;
+  margin-bottom: 5px;
 
 }
 

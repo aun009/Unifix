@@ -30,13 +30,20 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
         <dependency>
             <groupId>org.mongodb</groupId>
+<<<<<<< HEAD
             <artifactId>mongodb-driver-bom</artifactId>
             <version>5.6.1</version>
             <type>pom</type>
             <scope>import</scope>
+=======
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.12.14</version>
+>>>>>>> 7744be73fb3c0ea12cc40c4dddc454be9436ce61
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

@@ -9,9 +9,16 @@ public class EnvConfig {
 
     @Bean
     public Dotenv dotenv() {
-        return Dotenv.configure()
-                .directory("./")
-                .filename(".env")
-                .load();
+        try {
+            return Dotenv.configure()
+                    .directory("./")
+                    .filename(".env")
+                    .ignoreIfMissing()
+                    .load();
+        } catch (Exception e) {
+            // If .env file doesn't exist, return null
+            // Spring will use environment variables instead
+            return null;
+        }
     }
 }

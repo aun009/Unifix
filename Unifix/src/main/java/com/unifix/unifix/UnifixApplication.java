@@ -14,16 +14,25 @@ import java.util.Arrays;
 public class UnifixApplication {
 
     public static void main(String[] args) {
-        // Load .env file
-        Dotenv dotenv = Dotenv.configure()
-                .directory("./")
-                .filename(".env")
-                .load();
-        
-        // Set system properties from .env file
-        dotenv.entries().forEach(entry -> {
-            System.setProperty(entry.getKey(), entry.getValue());
-        });
+        // Load .env file only if it exists (for local development)
+        // On production (Render), use environment variables directly
+        try {
+            Dotenv dotenv = Dotenv.configure()
+                    .directory("./")
+                    .filename(".env")
+                    .ignoreIfMissing()
+                    .load();
+            
+            // Set system properties from .env file (only if it exists)
+            if (dotenv != null) {
+                dotenv.entries().forEach(entry -> {
+                    System.setProperty(entry.getKey(), entry.getValue());
+                });
+            }
+        } catch (Exception e) {
+            // If .env file doesn't exist, continue with environment variables
+            System.out.println("No .env file found, using environment variables");
+        }
         
         SpringApplication.run(UnifixApplication.class, args);
     }

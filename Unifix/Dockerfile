@@ -69,7 +69,7 @@ RUN java -Djarmode=layertools -jar target/app.jar extract --destination target/e
 FROM eclipse-temurin:17-jre-jammy AS final
 
 # Create a non-privileged user that the app will run under.
-# See https://docs.docker.com/go/dockerfile-user-best-practices/
+# See https://docs.docker.com/go/dockerfile-user-best-practices/x
 ARG UID=10001
 RUN adduser \
     --disabled-password \

@@ -14,8 +14,8 @@ const ViewFeedback = () => {
 
   const fetchFeedback = async () => {
     try {
-      // Use local Spring Boot backend
-      const apiUrl = "http://localhost:8081/api/feedback";
+      // Use Spring Boot backend (local or production)
+      const apiUrl = `${import.meta.env.VITE_API_URL || 'http://localhost:8081/api'}/feedback`;
       const response = await axios.get(apiUrl);
       
       console.log("Feedback data:", response.data);

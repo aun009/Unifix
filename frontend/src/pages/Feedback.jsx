@@ -14,7 +14,7 @@ const Feedback = () => {
   const [success, setSuccess] = useState(false);
 
   // API URL for Spring Boot backend
-  const apiUrl = "http://localhost:8081/api/feedback";
+  const apiUrl = `${import.meta.env.VITE_API_URL || 'http://localhost:8081/api'}/feedback`;
 
   const handleChange = (e) => {
     const { name, value } = e.target;

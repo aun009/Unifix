@@ -9,7 +9,11 @@ const app = express();
 const port = process.env.PORT || 8081;
 
 // Database Connection
-const connectionString = process.env.DATABASE_URL || 'postgresql://neondb_owner:npg_wzrm1cWXitC3@ep-falling-bread-adpoy9ql.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require';
+const connectionString = process.env.DATABASE_URL;
+if (!connectionString) {
+  console.error("Error: DATABASE_URL environment variable is not defined.");
+  process.exit(1);
+}
 
 const pool = new Pool({
   connectionString: connectionString,
@@ -130,8 +134,9 @@ app.post('/api/feedback', async (req, res) => {
 
     if (transporter) {
       console.log('Attempting to send email notification...');
-      const mailOptions = {
-        from: emailFrom,
+      const adminMailOptions = {
+        from: `"${savedFeedback.name} via UniFix" <${gmailUser}>`,
+        replyTo: savedFeedback.email,
         to: emailRecipient,
         subject: `New Feedback from UniFix - ${savedFeedback.name}`,
         text: `New feedback received from UniFix website:
@@ -146,15 +151,45 @@ Submitted at: ${savedFeedback.createdAt.toISOString()}
 This is an automated message from UniFix feedback system.`
       };
 
-      transporter.sendMail(mailOptions, (error, info) => {
+      const userMailOptions = {
+        from: `"UniFix Support" <${gmailUser}>`,
+        to: savedFeedback.email,
+        subject: `We received your feedback! - UniFix`,
+        text: `Hi ${savedFeedback.name},
+
+Thank you for reaching out to UniFix! We have successfully received your feedback.
+
+Here is a copy of your submission:
+--------------------------------------------------
+Message:
+${savedFeedback.message}
+--------------------------------------------------
+
+We appreciate you taking the time to write to us.
+
+Best regards,
+The UniFix Team`
+      };
+
+      // Send email to admin
+      transporter.sendMail(adminMailOptions, (error, info) => {
         if (error) {
-          console.error('Failed to send feedback email:', error.message);
+          console.error('Failed to send feedback email to admin:', error.message);
         } else {
-          console.log(`Feedback email sent successfully to: ${emailRecipient}`);
+          console.log(`Feedback email sent successfully to admin: ${emailRecipient}`);
+        }
+      });
+
+      // Send email to user
+      transporter.sendMail(userMailOptions, (error, info) => {
+        if (error) {
+          console.error('Failed to send confirmation email to user:', error.message);
+        } else {
+          console.log(`Confirmation email sent successfully to user: ${savedFeedback.email}`);
         }
       });
     } else {
-      console.log('Email service not configured, skipping email notification');
+      console.log('Email service not configured, skipping email notifications');
     }
 
     console.log('=== FEEDBACK SUBMISSION SUCCESS ===');

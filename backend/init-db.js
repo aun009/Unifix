@@ -1,7 +1,12 @@
 const { Client } = require('pg');
 const crypto = require('crypto');
+require('dotenv').config();
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://neondb_owner:npg_wzrm1cWXitC3@ep-falling-bread-adpoy9ql.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require';
+const connectionString = process.env.DATABASE_URL;
+if (!connectionString) {
+  console.error("Error: DATABASE_URL environment variable is not defined.");
+  process.exit(1);
+}
 
 const client = new Client({
   connectionString: connectionString,

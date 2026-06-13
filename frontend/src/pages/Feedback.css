@@ -4,8 +4,8 @@
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow-y: auto;
   position: relative;
   background: transparent; /* Transparent background */
   display: flex;
@@ -60,8 +60,10 @@
   -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(74, 7, 7, 0.18);
   padding: 2rem;
-  width: 400px;
+  width: 90%;
+  max-width: 400px;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .form-title {
@@ -215,3 +217,22 @@
 .refresh-button {
   margin-top: 20px;
 }
+
+@media (max-width: 768px) {
+  .feedback-page {
+    padding-top: 100px;
+    padding-bottom: 2rem;
+  }
+  .feedback-container {
+    height: auto;
+    min-height: calc(100vh - 100px);
+    overflow: visible;
+  }
+  .glass-card {
+    padding: 1.5rem;
+  }
+  .form-title {
+    font-size: 1.6rem;
+  }
+}
+

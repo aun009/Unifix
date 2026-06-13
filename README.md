@@ -4,7 +4,7 @@ Your all‑in‑one open‑source PaaS to automate dependency setups, fix lab ma
 
 [![Open Source](https://img.shields.io/badge/powered%20by-open%20source-3fb950.svg)](#)  
 [![Status](https://img.shields.io/badge/status-active-success.svg)](#)  
-[![Tech](https://img.shields.io/badge/stack-React%20%7C%20Vite%20%7C%20Spring%20Boot%20%7C%20MongoDB-0ea5e9.svg)](#)
+[![Tech](https://img.shields.io/badge/stack-React%20%7C%20Vite%20%7C%20Node.js%20%7C%20PostgreSQL-0ea5e9.svg)](#)
 
 ---
 
@@ -13,7 +13,7 @@ UniFix is a lightweight Platform‑as‑a‑Service designed for students, TAs a
 
 It automates:
 - Dependency installation (Python, Java, Docker, compilers, etc.)
-- Database setup (MongoDB Atlas)
+- Database setup (automated configuration scripts)
 - System fixes (common Linux configs, broken packages, permissions)
 - Storage configuration (NFS mounts, Samba shares)
 - Utility management (network fixes, environment variables, services)
@@ -26,90 +26,86 @@ Think: a student downloads a script from UniFix → executes it → problem solv
 ## 🗂 Repository layout
 ```
 UniFix/
-├─ frontend/            # React + Vite app (UI, animations, scripts)
-└─ Unifix/              # Spring Boot backend (REST API, email, MongoDB)
+├─ frontend/            # React + Vite app (UI, animations, responsive design)
+├─ backend/             # Node.js + Express backend (REST API, Neon PostgreSQL)
+└─ Unifix/              # (Legacy) Original Spring Boot backend
 ```
 
-- Frontend dev server: http://localhost:5173 (Vite may auto‑shift to 5174/5175 if 5173 busy)
+- Frontend dev server: http://localhost:5173
 - Backend server: http://localhost:8081
 
 ---
 
 ## 🚀 Features
-- Modern React UI with smooth CSS animations and particle effects
+- Modern React UI with smooth CSS animations, particle effects, and fully responsive layouts for mobile and tablet devices
 - Huge library of ready‑to‑run Bash scripts (see `frontend/public/scripts`)
-- Feedback form with validation and persistence to MongoDB Atlas
+- Feedback form with validation and persistence to Neon PostgreSQL
 - Email notifications to admins when new feedback is submitted
 - CORS enabled for local development
 
 ---
 
-## 🔐 Credentials you’ll need (once)
+## 🔐 Credentials and Setup
 
-### 1) MongoDB Atlas
-1. Create a free cluster at `https://www.mongodb.com/atlas`.
-2. Create a database user (username + strong password).
-3. Allow your IP (Network Access → IP Access List). Prefer 0.0.0.0/0 during development.
-4. Get the connection string (Driver: Java). Example:
+### 1) Neon PostgreSQL
+1. Create a database instance or log into your dashboard at `https://neon.tech`.
+2. Retrieve your connection string from the console. Example:
    
-   `mongodb+srv://<USER>:<PASSWORD>@cluster0.xxxxx.mongodb.net/unifix?retryWrites=true&w=majority&appName=Cluster0`
-5. If your password contains `@` or `%`, URL‑encode them (`@` → `%40`, `%` → `%25`).
+   `postgresql://neondb_owner:npg_wzrm1cWXitC3@ep-falling-bread-adpoy9ql.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require`
 
-Update backend `Unifix/src/main/resources/application.properties`:
-```
-spring.data.mongodb.uri=mongodb+srv://USER:PASSWORD@cluster0.xxxxx.mongodb.net/unifix?retryWrites=true&w=majority&appName=Cluster0
-spring.data.mongodb.database=unifix
+Create the environment file `backend/.env` with your parameters:
+```env
+PORT=8081
+DATABASE_URL=postgresql://neondb_owner:npg_wzrm1cWXitC3@ep-falling-bread-adpoy9ql.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require
 ```
 
-### 2) Gmail App Password (for email)
+Initialize the database schema (`feedbacks` table creation) by running:
+```bash
+cd backend
+node init-db.js
+```
+
+### 2) SMTP / Gmail App Password (Optional, for email notifications)
 1. Enable 2‑Step Verification on your Google account.
-2. Go to Security → App passwords → Generate new → App: Mail, Device: Other (e.g., UniFix Backend).
-3. Copy the 16‑character password (remove spaces when pasting).
-4. In `application.properties` set:
-```
-spring.mail.host=smtp.gmail.com
-spring.mail.port=587
-spring.mail.username=YOUR_GMAIL@example.com
-spring.mail.password=YOUR_16_CHAR_APP_PASSWORD
-spring.mail.properties.mail.smtp.auth=true
-spring.mail.properties.mail.smtp.starttls.enable=true
-
-# Who receives notifications
-app.email.from=YOUR_GMAIL@example.com
-app.email.recipient=YOUR_GMAIL@example.com
-```
-
-Tip: Prefer environment variable for secrets in development shells: `export MAIL_PASSWORD=XXXX` then
-```
-spring.mail.password=${MAIL_PASSWORD}
+2. Go to Security → App passwords → Generate new.
+3. Copy the 16‑character password.
+4. Append these variables to your `backend/.env`:
+```env
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=YOUR_GMAIL@example.com
+SMTP_PASS=YOUR_16_CHAR_APP_PASSWORD
+SMTP_RECEIVER=YOUR_GMAIL@example.com
 ```
 
 ---
 
 ## 🧰 Prerequisites
-- Node.js ≥ 20.19 (or 22.12+) and npm
-- Java 17+ (tested with 21) and Maven (or use the provided Maven Wrapper `./mvnw`)
+- Node.js ≥ 20.x
+- npm
 
 ---
 
 ## 🛠 Local development
 
-### 1) Backend (Spring Boot)
+### 1) Backend (Node.js + Express)
 ```bash
-cd Unifix
-# using system Maven
-mvn spring-boot:run
-# or using wrapper
-./mvnw spring-boot:run
+cd backend
+npm install
+npm start
 ```
-Backend starts at http://localhost:8081
+To run in development mode with automatic hot reloading (via nodemon):
+```bash
+npm run dev
+```
 
 Test endpoints:
 ```bash
-curl http://localhost:8081/api/feedback          # GET all feedback
+curl http://localhost:8081/api/feedback/health    # GET health check
+curl http://localhost:8081/api/feedback           # GET all feedbacks
 curl -X POST http://localhost:8081/api/feedback \
   -H "Content-Type: application/json" \
-  -d '{"name":"Test","email":"test@example.com","message":"Hello from UniFix"}'
+  -d '{"name":"Test User","email":"test@example.com","message":"Hello from UniFix Node.js backend"}'
 ```
 
 ### 2) Frontend (React + Vite)
@@ -123,45 +119,21 @@ Open the printed Local URL (typically http://localhost:5173).
 ---
 
 ## ⚙️ Configuration options
-- Backend port: `server.port=8081` (change in `application.properties`)
-- CORS: open by default for development
-- API base URL used by the frontend points to `http://localhost:8081/api/feedback`
-
-For production, expose the backend and set an env in the frontend (for example):
-```
-VITE_API_URL=https://your-domain/api
-```
-
----
-
-## 🧑‍🎓 How UniFix helps students and labs
-- Removes friction: one place to find common fixes and scripts
-- Faster lab support: students submit feedback, admins get notified via email
-- Consistency: standardizes environment setup across many lab machines
-- Extensible: add your own domain‑specific scripts and categories
+- Backend port: `PORT=8081` (can be configured in `backend/.env`)
+- CORS: opens automatically for development viewports
+- API base URL: defaults to `http://localhost:8081/api` in local development. For production deployment, set `VITE_API_URL` to your production server address.
 
 ---
 
 ## 🤝 Contributing
 1. Fork the repo and create a feature branch.
 2. Frontend: keep components small, prefer descriptive names, avoid one‑letter variables.
-3. Backend: follow Spring conventions; avoid catching exceptions without handling.
+3. Backend: write clean JavaScript, handle asynchronous errors, and use parameterized SQL queries to prevent SQL injections.
 4. Submit a PR with a clear description, screenshots (if UI), and test notes.
 
-Run linters/tests locally where applicable before opening a PR.
-
 ---
-
 
 ## 📄 License
 This project is open‑source under a permissive license (add your preferred license file if needed).
 
----
-
-## 💬 Support
-- Open an issue with logs and steps to reproduce.
-- For setup help, include your `application.properties` (mask secrets) and exact error text.
-
 Happy fixing! 🚀
-
-

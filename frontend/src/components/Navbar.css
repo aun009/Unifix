@@ -11,24 +11,16 @@
     border: 3px solid rgba(255, 255, 255, 0.18);
     padding: 0.75rem 1.5rem;
     z-index: 1000;
-    /* // i want to increase the size of this navbar */
     height: 50px;
     width: 40%;
     font-size: 1.8rem;
     font-weight: bold;
     font-style: oblique;
-
-    /* width; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
-  /*   font-size: 1.2rem;  this is not increasing  the text size in the navbar
-    i want to increase the size of navbar overall  not only height also text size in the navbar
-    i want to increase the size of navbar overall  not only height also text size in the navbar
-  */
-  /* i want to increase the size of navbar overall  not only height also text size in the navbar*/
-
-  
-
   .navbar-list {
     list-style: none;
     margin: 0;
@@ -36,10 +28,10 @@
     display: flex;
     gap: 1.5rem;
     text-align: center;
-    /* i want the home domains feedback contribute to be aligned in the center */
     justify-content: center;
     align-items: center;
     height: 100%;
+    width: 100%;
   }
   
   .navbar-link {
@@ -49,6 +41,7 @@
     font-weight: bold;
     transition: all 0.3s ease;
     padding: 0.5rem 1rem;
+    white-space: nowrap;
   }
   
   .navbar-link:hover {
@@ -56,3 +49,40 @@
     transform: scale(1.1);
     text-shadow: 0 0 10px rgba(52, 219, 77, 0.5);
   }
+
+  /* Responsive styling */
+  @media (max-width: 1200px) {
+    .navbar {
+      width: 60%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      width: 85%;
+      height: auto;
+      padding: 0.5rem 1rem;
+    }
+    .navbar-list {
+      gap: 0.5rem;
+    }
+    .navbar-link {
+      font-size: 1.1rem;
+      padding: 0.4rem 0.8rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .navbar {
+      width: 95%;
+      top: 1rem;
+    }
+    .navbar-list {
+      gap: 0.2rem;
+    }
+    .navbar-link {
+      font-size: 0.95rem;
+      padding: 0.3rem 0.5rem;
+    }
+  }
+
